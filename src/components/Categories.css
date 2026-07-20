@@ -1,0 +1,61 @@
+.categories{
+
+padding:70px 0;
+
+text-align:center;
+
+}
+
+.categories h2{
+
+font-size:34px;
+
+margin-bottom:40px;
+
+}
+
+.category-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+
+gap:30px;
+
+}
+
+.category-card{
+
+cursor:pointer;
+
+transition:.4s;
+
+}
+
+.category-card img{
+
+width:160px;
+
+height:160px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+margin:auto;
+
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+.category-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.category-card h4{
+
+margin-top:15px;
+
+}
