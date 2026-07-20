@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "./Hero.css";
@@ -26,6 +27,8 @@ const slides = [
 ];
 
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <Swiper
       modules={[Autoplay]}
@@ -46,7 +49,9 @@ export default function Hero() {
 
               <p>{slide.subtitle}</p>
 
-              <button>SHOP NOW</button>
+              <button onClick={() => navigate("/shop")}>
+                SHOP NOW
+              </button>
 
             </div>
           </section>
