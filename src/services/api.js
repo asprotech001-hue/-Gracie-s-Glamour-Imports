@@ -212,8 +212,6 @@ export async function addProduct(product) {
       !!product.new_arrival,
   };
 
-  console.log("Saving Product", payload);
-
   const { data, error } = await supabase
     .from(TABLES.PRODUCTS)
     .insert(payload)
@@ -291,6 +289,33 @@ export async function saveImages(productId, urls) {
   const { error } = await supabase
     .from(TABLES.PRODUCT_IMAGES)
     .insert(rows);
+
+  if (error) throw error;
+}
+
+export async function deleteProductImages(productId) {
+  const { data: existing, error: fetchError } = await supabase
+    .from(TABLES.PRODUCT_IMAGES)
+    .select("image_url")
+    .eq("product_id", productId);
+
+  if (fetchError) throw fetchError;
+
+  if (existing && existing.length > 0) {
+    const filenames = existing.map((row) => {
+      const parts = row.image_url.split("/");
+      return parts[parts.length - 1];
+    });
+
+    await supabase.storage
+      .from(BUCKETS.PRODUCTS)
+      .remove(filenames);
+  }
+
+  const { error } = await supabase
+    .from(TABLES.PRODUCT_IMAGES)
+    .delete()
+    .eq("product_id", productId);
 
   if (error) throw error;
 }
