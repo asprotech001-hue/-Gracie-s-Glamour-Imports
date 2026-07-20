@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "./Banner.css";
 
 export default function Banner(){
+
+const navigate = useNavigate();
 
 return(
 
@@ -20,7 +23,7 @@ New Imported Collections
 
 </p>
 
-<button>
+<button onClick={() => navigate("/shop")}>
 
 SHOP NOW
 
